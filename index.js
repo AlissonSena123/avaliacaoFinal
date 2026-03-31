@@ -50,6 +50,7 @@ document.querySelector("form").addEventListener("submit", async (e) => {
         }
 
         alert("Paciente Cadastrado com Sucesso!");
+        listarPacientesCadastrados();
 
     } catch (error) {
         console.log("ERRO: ", error);
