@@ -5,6 +5,23 @@ const SUPABASE_KEY = "sb_publishable_dswy_g4cAHuN-9EBdu9ZEQ_lOoPlfrv"
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
+const lista = document.getElementById('pacienteCadastrados')
+
+async function listarPacientesCadastrados() {
+  const { data, error } = await supabase.from('paciente').select()
+  if(error) {
+    console.error(error)
+    return
+  }
+
+  lista.innerHTML = ''
+  data.forEach(f => {
+    const li = document.createElement('li')
+    li.textContent = `${f.NOME} - ${f.CELULAR} - ${f.EMAIL}`
+    lista.appendChild(li)
+  })
+}
+
 document.querySelector("form").addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -37,4 +54,6 @@ document.querySelector("form").addEventListener("submit", async (e) => {
     } catch (error) {
         console.log("ERRO: ", error);
     }
-})
+});
+
+listarPacientesCadastrados();
